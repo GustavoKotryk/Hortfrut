@@ -13,13 +13,13 @@ public class HortfrutApp {
         do {
             opcaoMenu = atendente.menu();
 
-            if (opcaoMenu >= 1 && opcaoMenu <= 6) {
+            if (opcaoMenu >= 1 && opcaoMenu <= 4) {        
                 estoque.gerenciadorApp(opcaoMenu, atendente);
-            } else if (opcaoMenu == 7) {
+            } else if (opcaoMenu == 5) {                  
                 atendente.encerrando();
             } else {
                 atendente.erro();
             }
-        } while (opcaoMenu != 7);
+            } while (opcaoMenu != 5);                     
     }
 }

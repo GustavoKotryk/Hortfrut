@@ -3,7 +3,6 @@ package com.hortfrutapp.model;
 
 public class Fruta extends Produto {
 
-	private String nome;
 	private double peso;
 	
 		public Fruta () {
@@ -23,5 +22,8 @@ public class Fruta extends Produto {
 				this.peso = peso;
 			}
 		
-		
+			@Override
+			public String toString() {
+				return "Fruta [nome=" + nome + ", preco=R$" + preco + ", quantidade=" + quantidade + ", peso=" + peso + "kg]";
+			}
 }

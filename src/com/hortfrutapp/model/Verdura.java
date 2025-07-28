@@ -20,5 +20,10 @@ public class Verdura extends Produto {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    @Override 
+    public String toString(){
+        return "Verdura [nome=" + nome + ", preco=R$" + preco + ", quantidade=" + quantidade + ", tipo=" + tipo + "]";
+    }
 }
 

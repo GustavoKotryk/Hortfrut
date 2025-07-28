@@ -7,98 +7,64 @@ import java.util.ArrayList;
 
 public class Estoque {
 
-	private List<Fruta>estoqueFruta;
-	private List <Verdura>estoqueVerdura;
+    private List<Produto> estoqueProdutos; // Uma lista polimórfica!
 
-	public Estoque () {
-		estoqueFruta = new ArrayList<>();
-		estoqueVerdura = new ArrayList<>();
-	}
-	
-	public List<Fruta> getEstoqueFruta(){
-		return estoqueFruta;
-	}
-	
-	public void setEstoqueFruta (List<Fruta>estoqueFruta) {
-		this.estoqueFruta = estoqueFruta;
-	}
-
-    public List <Verdura> getEstoqueVerdura (){
-        return estoqueVerdura;
+	public Estoque() {
+        estoqueProdutos = new ArrayList<>();
     }
-
-    public void setEstoqueVerdura (List <Verdura>estoqueVerdura){
-        this.estoqueVerdura = estoqueVerdura;
+	
+	public List<Produto> getEstoqueProdutos() {
+        return estoqueProdutos;
+    }
+    
+    public void setEstoqueProdutos(List<Produto> estoqueProdutos) {
+        this.estoqueProdutos = estoqueProdutos;
     }
 
 	public void gerenciadorApp (int opcao, Atendente atendente){
         switch (opcao){
-            case 1 ->{
+            case 1 -> {
                 Fruta fruta = atendente.cadastrarFrutas(); 
-            if (fruta != null) {
-                estoqueFruta.add(fruta);
+                if (fruta != null) {
+                    estoqueProdutos.add(fruta); 
+                }
             }
-            }
-            case 2 ->{
+            case 2 -> {
                 Verdura verdura = atendente.cadastrarVerduras();
                 if (verdura != null) {
-                    estoqueVerdura.add(verdura); 
+                    estoqueProdutos.add(verdura); 
                 }
             }
             
-            case 3 ->{
-                if (estoqueFruta.isEmpty()) {
-                    atendente.frutaN();
+            case 3 -> {
+                if (estoqueProdutos.isEmpty()) {
+                    System.out.println("Nenhum produto cadastrado!");
                 } else {
-                    for (Fruta fruta : estoqueFruta) {
-                        atendente.listarFrutas(fruta);
+                    System.out.println("=== LISTA DE PRODUTOS ===");
+                    for (Produto produto : estoqueProdutos) {
+                        System.out.println(produto); // POLIMORFISMO! toString() correto é chamado automaticamente
                     }
                 }
             }
 
-            case 4 ->{
-                if (estoqueVerdura.isEmpty()) {
-                    atendente.VerduraN();
-                } else {
-                    for (Verdura verdura : estoqueVerdura) {
-                        atendente.listarVerduras(verdura);
+            case 4 -> {
+                System.out.print("Digite o nome do produto para remover: ");
+                String nome = atendente.lerNome(); // assumindo que você tem esse método
+                boolean removido = false;
+                
+                for (int indice = 0; indice < estoqueProdutos.size(); indice++) {
+                    if (estoqueProdutos.get(indice).getNome().equalsIgnoreCase(nome)) {
+                        estoqueProdutos.remove(indice);
+                        removido = true;
+                        System.out.println("Produto removido com sucesso!");
+                        break;
                     }
                 }
-            }
-
-            case 5 -> {
-               String nome = atendente.removerFruta();
-               boolean removido = false; 
-
-               for( int indice = 0; indice < estoqueFruta.size(); indice ++) {
-                   if (estoqueFruta.get(indice).getNome().equalsIgnoreCase(nome)) {
-                       estoqueFruta.remove(indice);
-                       removido = true;
-                       atendente.frutaRemovida();
-                       break;
-                   }
-               }
-               if (!removido) {
-                   atendente.frutaNaoEncontrado(nome);
-            }
-		}
-
-        case 6 -> {
-            String nome = atendente.removerVerdura();
-            boolean removido = false; 
-
-            for( int indice = 0; indice < estoqueVerdura.size(); indice ++) {
-                if (estoqueVerdura.get(indice).getNome().equalsIgnoreCase(nome)) {
-                    estoqueVerdura.remove(indice);
-                    removido = true;
-                    atendente.verduraRemovida();
-                    break;
+                
+                if (!removido) {
+                    System.out.println("Produto não encontrado: " + nome);
                 }
             }
-            if (!removido) {
-                atendente.verduraNaoEncontrado(nome);
-         }
      }
 	}
-}
 }
