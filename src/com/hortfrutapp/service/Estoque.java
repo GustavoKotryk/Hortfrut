@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class Estoque {
 
-    private List<Produto> estoqueProdutos; // Uma lista polimórfica!
-
+    private List<Produto> estoqueProdutos; 
+    
 	public Estoque() {
         estoqueProdutos = new ArrayList<>();
     }
@@ -42,14 +42,14 @@ public class Estoque {
                 } else {
                     System.out.println("=== LISTA DE PRODUTOS ===");
                     for (Produto produto : estoqueProdutos) {
-                        System.out.println(produto); // POLIMORFISMO! toString() correto é chamado automaticamente
+                        System.out.println(produto); 
                     }
                 }
             }
 
             case 4 -> {
                 System.out.print("Digite o nome do produto para remover: ");
-                String nome = atendente.lerNome(); // assumindo que você tem esse método
+                String nome = atendente.lerNome(); 
                 boolean removido = false;
                 
                 for (int indice = 0; indice < estoqueProdutos.size(); indice++) {
